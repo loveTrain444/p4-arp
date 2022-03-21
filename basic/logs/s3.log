@@ -1,0 +1,1969 @@
+Calling target program-options parser
+[21:46:43.028] [bmv2] [D] [thread 6672] Set default default entry for table 'tbl_basic252': basic252 - 
+[21:46:43.028] [bmv2] [D] [thread 6672] Set default default entry for table 'MyIngress.ipv4_lpm': MyIngress.drop - 
+[21:46:43.028] [bmv2] [D] [thread 6672] Set default default entry for table 'MyIngress.forward': MyIngress.drop - 
+[21:46:43.028] [bmv2] [D] [thread 6672] Entry 0 added to table 'MyIngress.forward'
+[21:46:43.028] [bmv2] [D] [thread 6672] Dumping entry 0
+Match key:
+* hdr.arp.$valid$     : EXACT     01
+* hdr.arp.oper        : TERNARY   0001 &&& ffff
+* hdr.arp_ipv4.$valid$: EXACT     01
+* hdr.ipv4.$valid$    : EXACT     00
+* hdr.icmp.$valid$    : EXACT     00
+* hdr.icmp.type       : TERNARY   00 &&& 00
+Priority: 1
+Action entry: MyIngress.send_arp_reply - 
+
+[21:46:43.028] [bmv2] [D] [thread 6672] Entry 1 added to table 'MyIngress.forward'
+[21:46:43.028] [bmv2] [D] [thread 6672] Dumping entry 1
+Match key:
+* hdr.arp.$valid$     : EXACT     00
+* hdr.arp.oper        : TERNARY   0000 &&& 0000
+* hdr.arp_ipv4.$valid$: EXACT     00
+* hdr.ipv4.$valid$    : EXACT     01
+* hdr.icmp.$valid$    : EXACT     00
+* hdr.icmp.type       : TERNARY   00 &&& 00
+Priority: 2
+Action entry: MyIngress.forward_ipv4 - 
+
+[21:46:43.028] [bmv2] [D] [thread 6672] Entry 2 added to table 'MyIngress.forward'
+[21:46:43.028] [bmv2] [D] [thread 6672] Dumping entry 2
+Match key:
+* hdr.arp.$valid$     : EXACT     00
+* hdr.arp.oper        : TERNARY   0000 &&& 0000
+* hdr.arp_ipv4.$valid$: EXACT     00
+* hdr.ipv4.$valid$    : EXACT     01
+* hdr.icmp.$valid$    : EXACT     01
+* hdr.icmp.type       : TERNARY   08 &&& ff
+Priority: 3
+Action entry: MyIngress.send_icmp_reply - 
+
+Adding interface s3-eth1 as port 1
+[21:46:43.028] [bmv2] [D] [thread 6672] Adding interface s3-eth1 as port 1
+Adding interface s3-eth2 as port 2
+[21:46:43.058] [bmv2] [D] [thread 6672] Adding interface s3-eth2 as port 2
+Server listening on 0.0.0.0:50053
+[21:46:43.088] [bmv2] [I] [thread 6672] Starting Thrift server on port 9092
+[21:46:43.088] [bmv2] [I] [thread 6672] Thrift server was started
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Processing packet received on port 2
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Parser 'parser': start
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] Bytes parsed: 14
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Parser 'parser': end
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Looking up key:
+
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] Action basic252
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] Action MyIngress.drop
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.250] [bmv2] [T] [thread 6682] [0.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Egress port is 511
+[21:46:43.250] [bmv2] [D] [thread 6682] [0.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Processing packet received on port 2
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Parser 'parser': start
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] Bytes parsed: 14
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Parser 'parser': end
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Looking up key:
+
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] Action basic252
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] Action MyIngress.drop
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.339] [bmv2] [T] [thread 6682] [1.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Egress port is 511
+[21:46:43.339] [bmv2] [D] [thread 6682] [1.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Processing packet received on port 2
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Parser 'parser': start
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] Bytes parsed: 14
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Parser 'parser': end
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Looking up key:
+
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] Action basic252
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] Action MyIngress.drop
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.339] [bmv2] [T] [thread 6682] [2.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Egress port is 511
+[21:46:43.339] [bmv2] [D] [thread 6682] [2.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Processing packet received on port 2
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Parser 'parser': start
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] Bytes parsed: 14
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Parser 'parser': end
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Looking up key:
+
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] Action basic252
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] Action MyIngress.drop
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.348] [bmv2] [T] [thread 6682] [3.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Egress port is 511
+[21:46:43.348] [bmv2] [D] [thread 6682] [3.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.359] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Processing packet received on port 2
+[21:46:43.359] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Parser 'parser': start
+[21:46:43.359] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.359] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] Bytes parsed: 14
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Parser 'parser': end
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Looking up key:
+
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] Action basic252
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] Action MyIngress.drop
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.360] [bmv2] [T] [thread 6682] [4.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Egress port is 511
+[21:46:43.360] [bmv2] [D] [thread 6682] [4.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Processing packet received on port 2
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Parser 'parser': start
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] Bytes parsed: 14
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Parser 'parser': end
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Looking up key:
+
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] Action basic252
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] Action MyIngress.drop
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.503] [bmv2] [T] [thread 6682] [5.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Egress port is 511
+[21:46:43.503] [bmv2] [D] [thread 6682] [5.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Processing packet received on port 2
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Parser 'parser': start
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] Bytes parsed: 14
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Parser 'parser': end
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Looking up key:
+
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] Action basic252
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] Action MyIngress.drop
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.531] [bmv2] [T] [thread 6682] [6.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Egress port is 511
+[21:46:43.531] [bmv2] [D] [thread 6682] [6.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Processing packet received on port 1
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Parser 'parser': start
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] Bytes parsed: 14
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Parser 'parser': end
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Looking up key:
+
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] Action basic252
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] Action MyIngress.drop
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.560] [bmv2] [T] [thread 6682] [7.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Egress port is 511
+[21:46:43.560] [bmv2] [D] [thread 6682] [7.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Processing packet received on port 1
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Parser 'parser': start
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.560] [bmv2] [T] [thread 6682] [8.0] [cxt 0] Bytes parsed: 14
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Parser 'parser': end
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.560] [bmv2] [T] [thread 6682] [8.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Looking up key:
+
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.560] [bmv2] [T] [thread 6682] [8.0] [cxt 0] Action basic252
+[21:46:43.560] [bmv2] [T] [thread 6682] [8.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.560] [bmv2] [T] [thread 6682] [8.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.560] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.561] [bmv2] [T] [thread 6682] [8.0] [cxt 0] Action MyIngress.drop
+[21:46:43.561] [bmv2] [T] [thread 6682] [8.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.561] [bmv2] [T] [thread 6682] [8.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Egress port is 511
+[21:46:43.561] [bmv2] [D] [thread 6682] [8.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Processing packet received on port 2
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Parser 'parser': start
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] Bytes parsed: 14
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Parser 'parser': end
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Looking up key:
+
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] Action basic252
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] Action MyIngress.drop
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.566] [bmv2] [T] [thread 6682] [9.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Egress port is 511
+[21:46:43.566] [bmv2] [D] [thread 6682] [9.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Processing packet received on port 1
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Parser 'parser': start
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] Bytes parsed: 14
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Parser 'parser': end
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Looking up key:
+
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] Action basic252
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] Action MyIngress.drop
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.572] [bmv2] [T] [thread 6682] [10.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Egress port is 511
+[21:46:43.572] [bmv2] [D] [thread 6682] [10.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Processing packet received on port 1
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Parser 'parser': start
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] Bytes parsed: 14
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Parser 'parser': end
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Looking up key:
+
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] Action basic252
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] Action MyIngress.drop
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.657] [bmv2] [T] [thread 6682] [11.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Egress port is 511
+[21:46:43.657] [bmv2] [D] [thread 6682] [11.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Processing packet received on port 1
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Parser 'parser': start
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.657] [bmv2] [T] [thread 6682] [12.0] [cxt 0] Bytes parsed: 14
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Parser 'parser': end
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.657] [bmv2] [T] [thread 6682] [12.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Looking up key:
+
+[21:46:43.657] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] Action basic252
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] Action MyIngress.drop
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.658] [bmv2] [T] [thread 6682] [12.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Egress port is 511
+[21:46:43.658] [bmv2] [D] [thread 6682] [12.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Processing packet received on port 1
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Parser 'parser': start
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] Bytes parsed: 14
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Parser 'parser': end
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Looking up key:
+
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] Action basic252
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] Action MyIngress.drop
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.666] [bmv2] [T] [thread 6682] [13.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Egress port is 511
+[21:46:43.666] [bmv2] [D] [thread 6682] [13.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Processing packet received on port 2
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Parser 'parser': start
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] Bytes parsed: 14
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Parser 'parser': end
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Looking up key:
+
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] Action basic252
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] Action MyIngress.drop
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.754] [bmv2] [T] [thread 6682] [14.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Egress port is 511
+[21:46:43.754] [bmv2] [D] [thread 6682] [14.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Processing packet received on port 1
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Parser 'parser': start
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] Bytes parsed: 14
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Parser 'parser': end
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Looking up key:
+
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] Action basic252
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] Action MyIngress.drop
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.791] [bmv2] [T] [thread 6682] [15.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Egress port is 511
+[21:46:43.791] [bmv2] [D] [thread 6682] [15.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Processing packet received on port 2
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Parser 'parser': start
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] Bytes parsed: 14
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Parser 'parser': end
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Looking up key:
+
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] Action basic252
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] Action MyIngress.drop
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.817] [bmv2] [T] [thread 6682] [16.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Egress port is 511
+[21:46:43.817] [bmv2] [D] [thread 6682] [16.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Processing packet received on port 1
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Parser 'parser': start
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] Bytes parsed: 14
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Parser 'parser': end
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Looking up key:
+
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] Action basic252
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] Action MyIngress.drop
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.885] [bmv2] [T] [thread 6682] [17.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.885] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.886] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.886] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Egress port is 511
+[21:46:43.886] [bmv2] [D] [thread 6682] [17.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:43.956] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Processing packet received on port 2
+[21:46:43.956] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Parser 'parser': start
+[21:46:43.956] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Extracting header 'ethernet'
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] Bytes parsed: 14
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Parser 'parser': end
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Pipeline 'ingress': start
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Looking up key:
+
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Action entry is basic252 - 
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] Action basic252
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] Action MyIngress.drop
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:43.957] [bmv2] [T] [thread 6682] [18.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Pipeline 'ingress': end
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Egress port is 511
+[21:46:43.957] [bmv2] [D] [thread 6682] [18.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Processing packet received on port 1
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Parser 'parser': start
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] Bytes parsed: 14
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Parser 'parser': end
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Looking up key:
+
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] Action basic252
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] Action MyIngress.drop
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.038] [bmv2] [T] [thread 6682] [19.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Egress port is 511
+[21:46:44.038] [bmv2] [D] [thread 6682] [19.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Processing packet received on port 1
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Parser 'parser': start
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] Bytes parsed: 14
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Parser 'parser': end
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Looking up key:
+
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] Action basic252
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] Action MyIngress.drop
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.040] [bmv2] [T] [thread 6682] [20.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Egress port is 511
+[21:46:44.040] [bmv2] [D] [thread 6682] [20.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Processing packet received on port 2
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Parser 'parser': start
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] Bytes parsed: 14
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Parser 'parser': end
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Looking up key:
+
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] Action basic252
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] Action MyIngress.drop
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.071] [bmv2] [T] [thread 6682] [21.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Egress port is 511
+[21:46:44.071] [bmv2] [D] [thread 6682] [21.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Processing packet received on port 2
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Parser 'parser': start
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.071] [bmv2] [T] [thread 6682] [22.0] [cxt 0] Bytes parsed: 14
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Parser 'parser': end
+[21:46:44.071] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.071] [bmv2] [T] [thread 6682] [22.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Looking up key:
+
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] Action basic252
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] Action MyIngress.drop
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.072] [bmv2] [T] [thread 6682] [22.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Egress port is 511
+[21:46:44.072] [bmv2] [D] [thread 6682] [22.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Processing packet received on port 1
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Parser 'parser': start
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] Bytes parsed: 14
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Parser 'parser': end
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Looking up key:
+
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] Action basic252
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] Action MyIngress.drop
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.136] [bmv2] [T] [thread 6682] [23.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Egress port is 511
+[21:46:44.136] [bmv2] [D] [thread 6682] [23.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Processing packet received on port 1
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Parser 'parser': start
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] Bytes parsed: 14
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Parser 'parser': end
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Looking up key:
+
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] Action basic252
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] Action MyIngress.drop
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.136] [bmv2] [T] [thread 6682] [24.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Egress port is 511
+[21:46:44.136] [bmv2] [D] [thread 6682] [24.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Processing packet received on port 1
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Parser 'parser': start
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] Bytes parsed: 14
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Parser 'parser': end
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Looking up key:
+
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] Action basic252
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] Action MyIngress.drop
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.198] [bmv2] [T] [thread 6682] [25.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Egress port is 511
+[21:46:44.198] [bmv2] [D] [thread 6682] [25.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Processing packet received on port 2
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Parser 'parser': start
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] Bytes parsed: 14
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Parser 'parser': end
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Looking up key:
+
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] Action basic252
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] Action MyIngress.drop
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.270] [bmv2] [T] [thread 6682] [26.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Egress port is 511
+[21:46:44.270] [bmv2] [D] [thread 6682] [26.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Processing packet received on port 1
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Parser 'parser': start
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] Bytes parsed: 14
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Parser 'parser': end
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Looking up key:
+
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] Action basic252
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] Action MyIngress.drop
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.294] [bmv2] [T] [thread 6682] [27.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Egress port is 511
+[21:46:44.294] [bmv2] [D] [thread 6682] [27.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Processing packet received on port 1
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Parser 'parser': start
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] Bytes parsed: 14
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Parser 'parser': end
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Looking up key:
+
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] Action basic252
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] Action MyIngress.drop
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.389] [bmv2] [T] [thread 6682] [28.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Egress port is 511
+[21:46:44.389] [bmv2] [D] [thread 6682] [28.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Processing packet received on port 1
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Parser 'parser': start
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] Bytes parsed: 14
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Parser 'parser': end
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Looking up key:
+
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] Action basic252
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] Action MyIngress.drop
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.493] [bmv2] [T] [thread 6682] [29.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Egress port is 511
+[21:46:44.493] [bmv2] [D] [thread 6682] [29.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Processing packet received on port 1
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Parser 'parser': start
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] Bytes parsed: 14
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Parser 'parser': end
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Looking up key:
+
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] Action basic252
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] Action MyIngress.drop
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.584] [bmv2] [T] [thread 6682] [30.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Egress port is 511
+[21:46:44.584] [bmv2] [D] [thread 6682] [30.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Processing packet received on port 1
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Parser 'parser': start
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Extracting header 'ethernet'
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] Bytes parsed: 14
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Parser 'parser': end
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Pipeline 'ingress': start
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Looking up key:
+
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Action entry is basic252 - 
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] Action basic252
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] Action MyIngress.drop
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:44.590] [bmv2] [T] [thread 6682] [31.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Pipeline 'ingress': end
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Egress port is 511
+[21:46:44.590] [bmv2] [D] [thread 6682] [31.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Processing packet received on port 2
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Parser 'parser': start
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Extracting header 'ethernet'
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] Bytes parsed: 14
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Parser 'parser': end
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Pipeline 'ingress': start
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Looking up key:
+
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Action entry is basic252 - 
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] Action basic252
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] Action MyIngress.drop
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:45.133] [bmv2] [T] [thread 6682] [32.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Pipeline 'ingress': end
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Egress port is 511
+[21:46:45.133] [bmv2] [D] [thread 6682] [32.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:45.274] [bmv2] [T] [thread 6717] bm_get_config
+[21:46:45.281] [bmv2] [T] [thread 6717] bm_table_add_entry
+[21:46:45.281] [bmv2] [D] [thread 6717] Entry 0 added to table 'MyIngress.ipv4_lpm'
+[21:46:45.281] [bmv2] [D] [thread 6717] Dumping entry 0
+Match key:
+* meta.dst_ipv4       : LPM       0a00010a/24
+Action entry: MyIngress.set_dst_info - 80000000111,1,
+
+[21:46:45.289] [bmv2] [T] [thread 6717] bm_table_add_entry
+[21:46:45.289] [bmv2] [D] [thread 6717] Entry 1 added to table 'MyIngress.ipv4_lpm'
+[21:46:45.289] [bmv2] [D] [thread 6717] Dumping entry 1
+Match key:
+* meta.dst_ipv4       : LPM       0a00031e/24
+Action entry: MyIngress.set_dst_info - 80000000333,2,
+
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Processing packet received on port 2
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Parser 'parser': start
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Extracting header 'ethernet'
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:45.448] [bmv2] [T] [thread 6682] [33.0] [cxt 0] Bytes parsed: 14
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Parser 'parser': end
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Pipeline 'ingress': start
+[21:46:45.448] [bmv2] [T] [thread 6682] [33.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Looking up key:
+
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:45.448] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Action entry is basic252 - 
+[21:46:45.448] [bmv2] [T] [thread 6682] [33.0] [cxt 0] Action basic252
+[21:46:45.448] [bmv2] [T] [thread 6682] [33.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:45.449] [bmv2] [T] [thread 6682] [33.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:45.449] [bmv2] [T] [thread 6682] [33.0] [cxt 0] Action MyIngress.drop
+[21:46:45.449] [bmv2] [T] [thread 6682] [33.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:45.449] [bmv2] [T] [thread 6682] [33.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Pipeline 'ingress': end
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Egress port is 511
+[21:46:45.449] [bmv2] [D] [thread 6682] [33.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Processing packet received on port 1
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Parser 'parser': start
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Extracting header 'ethernet'
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] Bytes parsed: 14
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Parser 'parser': end
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Pipeline 'ingress': start
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Looking up key:
+
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Action entry is basic252 - 
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] Action basic252
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] Action MyIngress.drop
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:45.673] [bmv2] [T] [thread 6682] [34.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Pipeline 'ingress': end
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Egress port is 511
+[21:46:45.673] [bmv2] [D] [thread 6682] [34.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Processing packet received on port 1
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Parser 'parser': start
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Extracting header 'ethernet'
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:45.768] [bmv2] [T] [thread 6682] [35.0] [cxt 0] Bytes parsed: 14
+[21:46:45.768] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Parser 'parser': end
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Pipeline 'ingress': start
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Looking up key:
+
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Action entry is basic252 - 
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] Action basic252
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] Action MyIngress.drop
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:45.769] [bmv2] [T] [thread 6682] [35.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Pipeline 'ingress': end
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Egress port is 511
+[21:46:45.769] [bmv2] [D] [thread 6682] [35.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Processing packet received on port 2
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Parser 'parser': start
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] Bytes parsed: 14
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Parser 'parser': end
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Looking up key:
+
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] Action basic252
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] Action MyIngress.drop
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.144] [bmv2] [T] [thread 6682] [36.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Egress port is 511
+[21:46:47.144] [bmv2] [D] [thread 6682] [36.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Processing packet received on port 2
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Parser 'parser': start
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] Bytes parsed: 14
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Parser 'parser': end
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Looking up key:
+
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] Action basic252
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] Action MyIngress.drop
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.313] [bmv2] [T] [thread 6682] [37.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Egress port is 511
+[21:46:47.313] [bmv2] [D] [thread 6682] [37.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Processing packet received on port 2
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Parser 'parser': start
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] Bytes parsed: 14
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Parser 'parser': end
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Looking up key:
+
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] Action basic252
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] Action MyIngress.drop
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.626] [bmv2] [T] [thread 6682] [38.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Egress port is 511
+[21:46:47.626] [bmv2] [D] [thread 6682] [38.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Processing packet received on port 2
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Parser 'parser': start
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] Bytes parsed: 14
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Parser 'parser': end
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Looking up key:
+
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] Action basic252
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] Action MyIngress.drop
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.655] [bmv2] [T] [thread 6682] [39.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Egress port is 511
+[21:46:47.655] [bmv2] [D] [thread 6682] [39.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Processing packet received on port 1
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Parser 'parser': start
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] Bytes parsed: 14
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Parser 'parser': end
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Looking up key:
+
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] Action basic252
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] Action MyIngress.drop
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.853] [bmv2] [T] [thread 6682] [40.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Egress port is 511
+[21:46:47.853] [bmv2] [D] [thread 6682] [40.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Processing packet received on port 1
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Parser 'parser': start
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] Bytes parsed: 14
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Parser 'parser': end
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Looking up key:
+
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] Action basic252
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] Action MyIngress.drop
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.912] [bmv2] [T] [thread 6682] [41.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Egress port is 511
+[21:46:47.912] [bmv2] [D] [thread 6682] [41.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Processing packet received on port 1
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Parser 'parser': start
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Extracting header 'ethernet'
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] Bytes parsed: 14
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Parser 'parser': end
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Pipeline 'ingress': start
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Looking up key:
+
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Action entry is basic252 - 
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] Action basic252
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] Action MyIngress.drop
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:47.946] [bmv2] [T] [thread 6682] [42.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Pipeline 'ingress': end
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Egress port is 511
+[21:46:47.946] [bmv2] [D] [thread 6682] [42.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Processing packet received on port 1
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Parser 'parser': start
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Extracting header 'ethernet'
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] Bytes parsed: 14
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Parser 'parser': end
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Pipeline 'ingress': start
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Looking up key:
+
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Action entry is basic252 - 
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] Action basic252
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] Action MyIngress.drop
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:48.169] [bmv2] [T] [thread 6682] [43.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Pipeline 'ingress': end
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Egress port is 511
+[21:46:48.169] [bmv2] [D] [thread 6682] [43.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Processing packet received on port 2
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Parser 'parser': start
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Extracting header 'ethernet'
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] Bytes parsed: 14
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Parser 'parser': end
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Pipeline 'ingress': start
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Looking up key:
+
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Action entry is basic252 - 
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] Action basic252
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] Action MyIngress.drop
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:55.078] [bmv2] [T] [thread 6682] [44.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Pipeline 'ingress': end
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Egress port is 511
+[21:46:55.078] [bmv2] [D] [thread 6682] [44.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Processing packet received on port 1
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Parser 'parser': start
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Extracting header 'ethernet'
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] Bytes parsed: 14
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Parser 'parser': end
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Pipeline 'ingress': start
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Looking up key:
+
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Action entry is basic252 - 
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] Action basic252
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] Action MyIngress.drop
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:56.106] [bmv2] [T] [thread 6682] [45.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Pipeline 'ingress': end
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Egress port is 511
+[21:46:56.106] [bmv2] [D] [thread 6682] [45.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Processing packet received on port 2
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Parser 'parser': start
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Extracting header 'ethernet'
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] Bytes parsed: 14
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Parser 'parser': end
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Pipeline 'ingress': start
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Looking up key:
+
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Action entry is basic252 - 
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] Action basic252
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] Action MyIngress.drop
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:56.361] [bmv2] [T] [thread 6682] [46.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Pipeline 'ingress': end
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Egress port is 511
+[21:46:56.361] [bmv2] [D] [thread 6682] [46.0] [cxt 0] Dropping packet at the end of ingress
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Processing packet received on port 1
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Parser 'parser': start
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Extracting header 'ethernet'
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Parser state 'start': key is 86dd
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] Bytes parsed: 14
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Parser 'parser': end
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Pipeline 'ingress': start
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] Applying table 'tbl_basic252'
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Looking up key:
+
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Table 'tbl_basic252': miss
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Action entry is basic252 - 
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] Action basic252
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] Action MyIngress.drop
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:46:56.614] [bmv2] [T] [thread 6682] [47.0] [cxt 0] basic.p4(169) Primitive exit
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Pipeline 'ingress': end
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Egress port is 511
+[21:46:56.614] [bmv2] [D] [thread 6682] [47.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Processing packet received on port 2
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Parser 'parser': start
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Extracting header 'ethernet'
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] Bytes parsed: 14
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Parser 'parser': end
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Pipeline 'ingress': start
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Looking up key:
+
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Action entry is basic252 - 
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] Action basic252
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] Action MyIngress.drop
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:11.208] [bmv2] [T] [thread 6682] [48.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Pipeline 'ingress': end
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Egress port is 511
+[21:47:11.208] [bmv2] [D] [thread 6682] [48.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Processing packet received on port 1
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Parser 'parser': start
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Extracting header 'ethernet'
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:11.974] [bmv2] [T] [thread 6682] [49.0] [cxt 0] Bytes parsed: 14
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Parser 'parser': end
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Pipeline 'ingress': start
+[21:47:11.974] [bmv2] [T] [thread 6682] [49.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Looking up key:
+
+[21:47:11.974] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Action entry is basic252 - 
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] Action basic252
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] Action MyIngress.drop
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:11.975] [bmv2] [T] [thread 6682] [49.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Pipeline 'ingress': end
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Egress port is 511
+[21:47:11.975] [bmv2] [D] [thread 6682] [49.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:14.535] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Processing packet received on port 2
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Parser 'parser': start
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Extracting header 'ethernet'
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] Bytes parsed: 14
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Parser 'parser': end
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Pipeline 'ingress': start
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Looking up key:
+
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Action entry is basic252 - 
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] Action basic252
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] Action MyIngress.drop
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:14.536] [bmv2] [T] [thread 6682] [50.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Pipeline 'ingress': end
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Egress port is 511
+[21:47:14.536] [bmv2] [D] [thread 6682] [50.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Processing packet received on port 1
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Parser 'parser': start
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Extracting header 'ethernet'
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] Bytes parsed: 14
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Parser 'parser': end
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Pipeline 'ingress': start
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Looking up key:
+
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Action entry is basic252 - 
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] Action basic252
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] Action MyIngress.drop
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:14.536] [bmv2] [T] [thread 6682] [51.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Pipeline 'ingress': end
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Egress port is 511
+[21:47:14.536] [bmv2] [D] [thread 6682] [51.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Processing packet received on port 1
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Parser 'parser': start
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Extracting header 'ethernet'
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] Bytes parsed: 14
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Parser 'parser': end
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Pipeline 'ingress': start
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Looking up key:
+
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Action entry is basic252 - 
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] Action basic252
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:45.256] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] Action MyIngress.drop
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:45.256] [bmv2] [T] [thread 6682] [52.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:45.257] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:45.257] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Pipeline 'ingress': end
+[21:47:45.257] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Egress port is 511
+[21:47:45.257] [bmv2] [D] [thread 6682] [52.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Processing packet received on port 2
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Parser 'parser': start
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Extracting header 'ethernet'
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] Bytes parsed: 14
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Parser 'parser': end
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Pipeline 'ingress': start
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Looking up key:
+
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Action entry is basic252 - 
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] Action basic252
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] Action MyIngress.drop
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:45.257] [bmv2] [T] [thread 6682] [53.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Pipeline 'ingress': end
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Egress port is 511
+[21:47:45.257] [bmv2] [D] [thread 6682] [53.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Processing packet received on port 1
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Parser 'parser': start
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Extracting header 'ethernet'
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] Bytes parsed: 14
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Parser 'parser': end
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Pipeline 'ingress': start
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Looking up key:
+
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Action entry is basic252 - 
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] Action basic252
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] Action MyIngress.drop
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:49.352] [bmv2] [T] [thread 6682] [54.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Pipeline 'ingress': end
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Egress port is 511
+[21:47:49.352] [bmv2] [D] [thread 6682] [54.0] [cxt 0] Dropping packet at the end of ingress
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Processing packet received on port 2
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Parser 'parser': start
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Extracting header 'ethernet'
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Parser state 'start': key is 86dd
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] Bytes parsed: 14
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Parser 'parser': end
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Pipeline 'ingress': start
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] Applying table 'tbl_basic252'
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Looking up key:
+
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Table 'tbl_basic252': miss
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Action entry is basic252 - 
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] Action basic252
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] Action MyIngress.drop
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:47:51.399] [bmv2] [T] [thread 6682] [55.0] [cxt 0] basic.p4(169) Primitive exit
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Pipeline 'ingress': end
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Egress port is 511
+[21:47:51.399] [bmv2] [D] [thread 6682] [55.0] [cxt 0] Dropping packet at the end of ingress
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Processing packet received on port 1
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Parser 'parser': start
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Extracting header 'ethernet'
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Parser state 'start': key is 86dd
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] Bytes parsed: 14
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Parser 'parser': end
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Pipeline 'ingress': start
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] Applying table 'tbl_basic252'
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Looking up key:
+
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Table 'tbl_basic252': miss
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Action entry is basic252 - 
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] Action basic252
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] Action MyIngress.drop
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:48:52.841] [bmv2] [T] [thread 6682] [56.0] [cxt 0] basic.p4(169) Primitive exit
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Pipeline 'ingress': end
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Egress port is 511
+[21:48:52.841] [bmv2] [D] [thread 6682] [56.0] [cxt 0] Dropping packet at the end of ingress
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Processing packet received on port 2
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Parser 'parser': start
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Extracting header 'ethernet'
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Parser state 'start': key is 86dd
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] Bytes parsed: 14
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Parser 'parser': end
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Pipeline 'ingress': start
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] Applying table 'tbl_basic252'
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Looking up key:
+
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Table 'tbl_basic252': miss
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Action entry is basic252 - 
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] Action basic252
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] Action MyIngress.drop
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:48:54.888] [bmv2] [T] [thread 6682] [57.0] [cxt 0] basic.p4(169) Primitive exit
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Pipeline 'ingress': end
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Egress port is 511
+[21:48:54.888] [bmv2] [D] [thread 6682] [57.0] [cxt 0] Dropping packet at the end of ingress
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Processing packet received on port 1
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Parser 'parser': start
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Extracting header 'ethernet'
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Parser state 'start': key is 86dd
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] Bytes parsed: 14
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Parser 'parser': end
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Pipeline 'ingress': start
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] Applying table 'tbl_basic252'
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Looking up key:
+
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Table 'tbl_basic252': miss
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Action entry is basic252 - 
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] Action basic252
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] Action MyIngress.drop
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:48:58.985] [bmv2] [T] [thread 6682] [58.0] [cxt 0] basic.p4(169) Primitive exit
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Pipeline 'ingress': end
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Egress port is 511
+[21:48:58.985] [bmv2] [D] [thread 6682] [58.0] [cxt 0] Dropping packet at the end of ingress
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Processing packet received on port 2
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Parser 'parser': start
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Extracting header 'ethernet'
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Parser state 'start': key is 86dd
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] Bytes parsed: 14
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Parser 'parser': end
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Pipeline 'ingress': start
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] Applying table 'tbl_basic252'
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Looking up key:
+
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Table 'tbl_basic252': miss
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Action entry is basic252 - 
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] Action basic252
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] Action MyIngress.drop
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:49:03.078] [bmv2] [T] [thread 6682] [59.0] [cxt 0] basic.p4(169) Primitive exit
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Pipeline 'ingress': end
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Egress port is 511
+[21:49:03.078] [bmv2] [D] [thread 6682] [59.0] [cxt 0] Dropping packet at the end of ingress
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Processing packet received on port 1
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Parser 'parser': start
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Extracting header 'ethernet'
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Parser state 'start': key is 86dd
+[21:51:08.009] [bmv2] [T] [thread 6682] [60.0] [cxt 0] Bytes parsed: 14
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Parser 'parser': end
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Pipeline 'ingress': start
+[21:51:08.009] [bmv2] [T] [thread 6682] [60.0] [cxt 0] Applying table 'tbl_basic252'
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Looking up key:
+
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Table 'tbl_basic252': miss
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Action entry is basic252 - 
+[21:51:08.009] [bmv2] [T] [thread 6682] [60.0] [cxt 0] Action basic252
+[21:51:08.009] [bmv2] [T] [thread 6682] [60.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:51:08.009] [bmv2] [T] [thread 6682] [60.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:51:08.009] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:51:08.010] [bmv2] [T] [thread 6682] [60.0] [cxt 0] Action MyIngress.drop
+[21:51:08.010] [bmv2] [T] [thread 6682] [60.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:51:08.010] [bmv2] [T] [thread 6682] [60.0] [cxt 0] basic.p4(169) Primitive exit
+[21:51:08.010] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:51:08.010] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Pipeline 'ingress': end
+[21:51:08.010] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Egress port is 511
+[21:51:08.010] [bmv2] [D] [thread 6682] [60.0] [cxt 0] Dropping packet at the end of ingress
+[21:51:24.393] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Processing packet received on port 1
+[21:51:24.393] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Parser 'parser': start
+[21:51:24.393] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:51:24.393] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Extracting header 'ethernet'
+[21:51:24.393] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Parser state 'start': key is 86dd
+[21:51:24.393] [bmv2] [T] [thread 6682] [61.0] [cxt 0] Bytes parsed: 14
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Parser 'parser': end
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Pipeline 'ingress': start
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] Applying table 'tbl_basic252'
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Looking up key:
+
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Table 'tbl_basic252': miss
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Action entry is basic252 - 
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] Action basic252
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] Action MyIngress.drop
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:51:24.394] [bmv2] [T] [thread 6682] [61.0] [cxt 0] basic.p4(169) Primitive exit
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Pipeline 'ingress': end
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Egress port is 511
+[21:51:24.394] [bmv2] [D] [thread 6682] [61.0] [cxt 0] Dropping packet at the end of ingress
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Processing packet received on port 2
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Parser 'parser': start
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Extracting header 'ethernet'
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Parser state 'start': key is 86dd
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] Bytes parsed: 14
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Parser 'parser': end
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Pipeline 'ingress': start
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] Applying table 'tbl_basic252'
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Looking up key:
+
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Table 'tbl_basic252': miss
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Action entry is basic252 - 
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] Action basic252
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] Action MyIngress.drop
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:51:24.394] [bmv2] [T] [thread 6682] [62.0] [cxt 0] basic.p4(169) Primitive exit
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Pipeline 'ingress': end
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Egress port is 511
+[21:51:24.394] [bmv2] [D] [thread 6682] [62.0] [cxt 0] Dropping packet at the end of ingress
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Processing packet received on port 2
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Parser 'parser': start
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Extracting header 'ethernet'
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Parser state 'start': key is 86dd
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] Bytes parsed: 14
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Parser 'parser': end
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Pipeline 'ingress': start
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] Applying table 'tbl_basic252'
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Looking up key:
+
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Table 'tbl_basic252': miss
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Action entry is basic252 - 
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] Action basic252
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] Action MyIngress.drop
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:51:40.776] [bmv2] [T] [thread 6682] [63.0] [cxt 0] basic.p4(169) Primitive exit
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Pipeline 'ingress': end
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Egress port is 511
+[21:51:40.776] [bmv2] [D] [thread 6682] [63.0] [cxt 0] Dropping packet at the end of ingress
+[21:55:30.152] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Processing packet received on port 1
+[21:55:30.152] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Parser 'parser': start
+[21:55:30.152] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:55:30.152] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Extracting header 'ethernet'
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Parser state 'start': key is 86dd
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] Bytes parsed: 14
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Parser 'parser': end
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Pipeline 'ingress': start
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] Applying table 'tbl_basic252'
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Looking up key:
+
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Table 'tbl_basic252': miss
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Action entry is basic252 - 
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] Action basic252
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] Action MyIngress.drop
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:55:30.153] [bmv2] [T] [thread 6682] [64.0] [cxt 0] basic.p4(169) Primitive exit
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Pipeline 'ingress': end
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Egress port is 511
+[21:55:30.153] [bmv2] [D] [thread 6682] [64.0] [cxt 0] Dropping packet at the end of ingress
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Processing packet received on port 1
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Parser 'parser': start
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Extracting header 'ethernet'
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Parser state 'start': key is 86dd
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] Bytes parsed: 14
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Parser 'parser': end
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Pipeline 'ingress': start
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] Applying table 'tbl_basic252'
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Looking up key:
+
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Table 'tbl_basic252': miss
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Action entry is basic252 - 
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] Action basic252
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] Action MyIngress.drop
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:56:02.920] [bmv2] [T] [thread 6682] [65.0] [cxt 0] basic.p4(169) Primitive exit
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Pipeline 'ingress': end
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Egress port is 511
+[21:56:02.920] [bmv2] [D] [thread 6682] [65.0] [cxt 0] Dropping packet at the end of ingress
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Processing packet received on port 2
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Parser 'parser': start
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Extracting header 'ethernet'
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Parser state 'start': key is 86dd
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] Bytes parsed: 14
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Parser 'parser': end
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Pipeline 'ingress': start
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] Applying table 'tbl_basic252'
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Looking up key:
+
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Table 'tbl_basic252': miss
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Action entry is basic252 - 
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] Action basic252
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] Action MyIngress.drop
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:56:02.920] [bmv2] [T] [thread 6682] [66.0] [cxt 0] basic.p4(169) Primitive exit
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Pipeline 'ingress': end
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Egress port is 511
+[21:56:02.920] [bmv2] [D] [thread 6682] [66.0] [cxt 0] Dropping packet at the end of ingress
+[21:56:35.688] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Processing packet received on port 2
+[21:56:35.688] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Parser 'parser': start
+[21:56:35.688] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Parser 'parser' entering state 'start'
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Extracting header 'ethernet'
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Parser state 'start': key is 86dd
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] Bytes parsed: 14
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Parser 'parser': end
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Pipeline 'ingress': start
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] Applying table 'tbl_basic252'
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Looking up key:
+
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Table 'tbl_basic252': miss
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Action entry is basic252 - 
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] Action basic252
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] basic.p4(252) Primitive meta.my_mac = 0x000102030405
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] Applying table 'MyIngress.ipv4_lpm'
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Looking up key:
+* meta.dst_ipv4       : 00000000
+
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Table 'MyIngress.ipv4_lpm': miss
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Action entry is MyIngress.drop - 
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] Action MyIngress.drop
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] basic.p4(168) Primitive mark_to_drop(standard_metadata)
+[21:56:35.689] [bmv2] [T] [thread 6682] [67.0] [cxt 0] basic.p4(169) Primitive exit
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Packet is marked for exit, interrupting pipeline
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Pipeline 'ingress': end
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Egress port is 511
+[21:56:35.689] [bmv2] [D] [thread 6682] [67.0] [cxt 0] Dropping packet at the end of ingress
+open: No such file or directory
+open: No such file or directory
+open: No such file or directory

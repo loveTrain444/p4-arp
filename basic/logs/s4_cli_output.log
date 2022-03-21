@@ -1,0 +1,14 @@
+Obtaining JSON from switch...
+Done
+Control utility for runtime P4 table manipulation
+RuntimeCmd: Adding entry to lpm match table ipv4_lpm
+match key:           LPM-0a:00:02:14/24
+action:              set_dst_info
+runtime data:        08:00:00:00:02:22	00:04
+Entry has been added with handle 0
+RuntimeCmd: Adding entry to lpm match table ipv4_lpm
+match key:           LPM-0a:00:04:28/24
+action:              set_dst_info
+runtime data:        08:00:00:00:04:44	00:03
+Entry has been added with handle 1
+RuntimeCmd: 
