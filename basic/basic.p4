@@ -52,11 +52,11 @@ const bit<16> ARP_OPER_REQUEST   = 1;
 const bit<16> ARP_OPER_REPLY     = 2;
 
 header arp_t {
-    bit<16> htype;
-    bit<16> ptype;
-    bit<8>  hlen;
-    bit<8>  plen;
-    bit<16> oper;
+    bit<16> htype;//硬件类型
+    bit<16> ptype;//上层协议类型
+    bit<8>  hlen;//mac地址长度
+    bit<8>  plen;//ip地址长度
+    bit<16> oper;//操作类型
 }
 
 header arp_ipv4_t {
@@ -116,18 +116,17 @@ parser MyParser(
     }
 
     state parse_arp {
+        //解析arp，如果该arp的协议类型是ipv4，则跳转到parse_arp_ipv4
         packet.extract(hdr.arp);
-        transition select(hdr.arp.htype, hdr.arp.ptype,
-                          hdr.arp.hlen,  hdr.arp.plen) {
-            (ARP_HTYPE_ETHERNET, ARP_PTYPE_IPV4,
-             ARP_HLEN_ETHERNET,  ARP_PLEN_IPV4) : parse_arp_ipv4;
+        transition select( hdr.arp.ptype, hdr.arp.plen) {
+            (ARP_PTYPE_IPV4,ARP_PLEN_IPV4) : parse_arp_ipv4;
             default : accept;
         }
     }
 
     state parse_arp_ipv4 {
         packet.extract(hdr.arp_ipv4);
-        meta.dst_ipv4 = hdr.arp_ipv4.tpa;
+        meta.dst_ipv4 = hdr.arp_ipv4.tpa;//将目标协议地址（target protocol address）暂存在元数据里
         transition accept;
     }            
 
@@ -141,7 +140,7 @@ parser MyParser(
     }
 
     state parse_icmp {
-        packet.extract(hdr.icmp);
+        packet.extract(hdr.icmp);//解析icmp包头，解析成功会将validity域设置为true
         transition accept;
     }    
 }
@@ -173,6 +172,12 @@ control MyIngress(
                         port_id_t  egress_port)
     {
         meta.mac_da      = mac_da;
+        /*
+        * 由于示例的拓扑较简单，所以其将数据包的源mac地址暂存在元数据里，并且源
+        * mac作为参数写在config文件里。但basic的拓扑较复杂，无法直接确定源mac。
+        * 而从官方给的ipv4forward.p4代码可以看出，源mac可以从hdr.ethernet中获取。 
+        */
+        meta.mac_sa      = hdr.ethernet.srcAddr;
         meta.egress_port = egress_port;
     }
     
@@ -191,16 +196,18 @@ control MyIngress(
     }
 
     action send_arp_reply() {
+        //交换以太网head中的源和目标mac地址
         hdr.ethernet.dstAddr = hdr.arp_ipv4.sha;
         hdr.ethernet.srcAddr = meta.mac_da;
-        
+        //将head中的操作类型字段设置为arp回复
         hdr.arp.oper         = ARP_OPER_REPLY;
-        
+        //将目标mac地址 （THA） 和目标协议地址 （TPA） 更新为ARP数据包的 SHA 和 SPA。
         hdr.arp_ipv4.tha     = hdr.arp_ipv4.sha;
         hdr.arp_ipv4.tpa     = hdr.arp_ipv4.spa;
+        //将 ARP 标头中的发送方mac地址 （SHA） 和发送方协议地址 （SPA） 更新为交换机的 MAC 和 IP 地址
         hdr.arp_ipv4.sha     = meta.mac_da;
         hdr.arp_ipv4.spa     = meta.dst_ipv4;
-
+        //将出端口设置成入端口
         standard_metadata.egress_spec = standard_metadata.ingress_port;
     }
 
@@ -284,10 +291,8 @@ control MyDeparser(
 {
     apply {
         packet.emit(hdr.ethernet);
-        /* ARP Case */
         packet.emit(hdr.arp);
         packet.emit(hdr.arp_ipv4);
-        /* IPv4 case */
         packet.emit(hdr.ipv4);
         packet.emit(hdr.icmp);
     }
