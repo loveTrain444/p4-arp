@@ -1,4 +1,0 @@
-table_add ipv4_lpm set_dst_info 10.0.1.10/24 => 08:00:00:00:01:11 3
-table_add ipv4_lpm set_dst_info 10.0.1.10/24 => 08:00:00:00:02:22 4
-table_add ipv4_lpm set_dst_info 10.0.1.10/24 => 08:00:00:00:03:33 1
-table_add ipv4_lpm set_dst_info 10.0.1.10/24 => 08:00:00:00:04:44 2
